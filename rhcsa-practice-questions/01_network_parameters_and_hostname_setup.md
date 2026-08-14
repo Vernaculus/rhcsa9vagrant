@@ -41,7 +41,7 @@ Option 2: One-liner Command:
 ```
 [root@rocky ~]# nmcli con up eth1
 ```
-* Use ```ip addr``` to confirm the IPs are correct.  Then ```ssh root@172.24.40.40``` 
+* Use ```ip addr``` to confirm the IPs are correct.  Then ```ssh root@192.168.99.67``` 
 
 * Next, to set the hostname:
 ```
