@@ -83,7 +83,8 @@ Syntax:
 ```
 $ podman run -v <src>:<dst>:Z <image> 
 
-# Add port to the firewall 
+# Add port to the firewall (install it first if it's not already present)
+dnf install -y firewalld && systemctl enable --now firewalld
 firewall-cmd --add-port=8080/tcp --permanent 
 firewall-cmd --reload 
 ```

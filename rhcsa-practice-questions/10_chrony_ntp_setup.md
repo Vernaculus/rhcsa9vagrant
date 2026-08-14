@@ -22,8 +22,9 @@ Configure your system to synchronize the time to the Hail Workstation, ```hail.h
 #pool 2.rhel.pool.ntp.org iburst
 server hail.hailmary.local iburst maxpoll 16
 ```
-* Now SSH to Hail or open it up in another tab to open the firewall:
+* Now SSH to Hail or open it up in another tab to open the firewall (install it first if it's not already present):
 ```
+[root@hail ~]# dnf install -y firewalld && systemctl enable --now firewalld
 [root@hail ~]# firewall-cmd --permanent --add-service=ntp
 success
 [root@hail ~]# firewall-cmd --reload

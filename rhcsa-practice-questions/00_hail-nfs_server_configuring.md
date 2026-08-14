@@ -35,8 +35,9 @@
 [root@hail ~]# exportfs -avr
 ```
 
-* Configure the firewall:
+* Configure the firewall (install it first if it's not already present):
 ```
+[root@hail ~]# dnf install -y firewalld && systemctl enable --now firewalld
 [root@hail ~]# firewall-cmd --add-service={nfs,mountd,rpc-bind} --permanent
 [root@hail ~]# firewall-cmd --reload
 ```

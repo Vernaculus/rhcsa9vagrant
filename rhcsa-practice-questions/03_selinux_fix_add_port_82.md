@@ -50,9 +50,10 @@ Apr 23 08:27:47 rocky.hailmary.local systemd[1]: Failed to start The Apache HTTP
 ```
 
 * This is due to SELINUX File Context issues on port 82...
-* Let’s run ```semanage port -l | grep 80``` to see what context port 80 is:
+* Let’s run ```semanage port -l | grep 80``` to see what context port 80 is (install the package providing ```semanage``` first if needed):
 
 ```
+[root@rocky ~]# dnf install -y policycoreutils-python-utils
 [root@rocky ~]# semanage port -l | grep 80
 http_cache_port_t              tcp      8080, 8118, 8123, 10001-10010
 http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443, 9000
@@ -91,8 +92,9 @@ varnishd_port_t                tcp      6081-6082
 [root@rocky ~]# systemctl enable --now httpd
 ```
 
-* Don’t forget to open the port 82 on the firewall:
+* Don’t forget to open the port 82 on the firewall (install it first if it's not already present):
 ```
+[root@rocky ~]# dnf install -y firewalld && systemctl enable --now firewalld
 [root@rocky ~]# firewall-cmd --permanent --add-port=82/tcp
 success
 [root@rocky ~]# firewall-cmd --reload

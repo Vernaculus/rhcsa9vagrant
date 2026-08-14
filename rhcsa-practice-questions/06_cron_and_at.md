@@ -70,7 +70,7 @@ The at command is used to schedule commands to be executed at a particular time 
 
 * Install the at package:
 ```
-[root@rocky ~]# install at
+[root@rocky ~]# dnf install -y at
 [root@rocky ~]# systemctl enable --now atd
 ```
 
