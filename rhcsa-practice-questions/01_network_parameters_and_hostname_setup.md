@@ -32,14 +32,14 @@ Option 1: EASY (GUI Configuration)
 [root@rocky ~]# nmtui
 ```
 
-Option 2: One-liner Command:
+Option 2: One-liner Command (do on secondary eth not primary):
 ```
-[root@rocky ~]# nmcli con mod eth1 ipv4.method manual ipv4.addresses 192.168.99.67/24 ipv4.gateway 192.168.99.1 ipv4.dns 192.168.99.1
+[root@rocky ~]# nmcli con mod <your-connection-name> ipv4.method manual ipv4.addresses 192.168.99.67/24 ipv4.gateway 192.168.99.1 ipv4.dns 192.168.99.1
 ```   
 
 * Then:
 ```
-[root@rocky ~]# nmcli con up eth1
+[root@rocky ~]# nmcli con up <your-connection-name>
 ```
 * Use ```ip addr``` to confirm the IPs are correct.  Then ```ssh root@192.168.99.67``` 
 
