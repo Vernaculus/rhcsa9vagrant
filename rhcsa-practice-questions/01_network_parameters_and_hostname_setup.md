@@ -8,9 +8,9 @@ Red Hat now has a [lab](https://www.redhat.com/en/interactive-labs/networking-ba
 ### QUESTION #1:
 ```
 Configure TCP/IP and "hostname" as following:  
-IP Address: 172.24.40.40/24 
-Gateway: 172.24.40.1 
-DNS: 172.24.40.1
+IP Address: 192.168.99.67/24 
+Gateway: 192.168.99.1
+DNS: 192.168.99.1
 
 Hostname: rocky.hailmary.local
 ```
