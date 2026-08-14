@@ -1,4 +1,4 @@
-***On Node1***
+***On Rocky***
 
 # Create a shared directory by group
 
@@ -24,21 +24,21 @@ Create a collaborative directory /shared/sysadm with the following characteristi
 * First we create a directory which is pretty straightforward (however creating user-related folders in root hierarchy is not a good idea)
 
 ```
-[root@node1 ~]# mkdir -p /shared/sysadm
+[root@rocky ~]# mkdir -p /shared/sysadm
 ```
 
 * Then we create the group and assign it as group owner of the created folder:
 
 ```
-[root@node1 ~]# groupadd sysadm
-[root@node1 ~]# chgrp sysadm /shared/sysadm
+[root@rocky ~]# groupadd sysadm
+[root@rocky ~]# chgrp sysadm /shared/sysadm
 ```
 
 
 * Here is the most tricky part. To achieve our goal we will be using SETGUID or **SGID**, which is a concept that users operating on the files are
 given the same permissions like to group owner of the folder/file. We've already set group owner for the folder so now we assign permissions to it.   
 ```
-[root@node1 ~]# chmod 2770 /shared/sysadm
+[root@rocky ~]# chmod 2770 /shared/sysadm
 ```
 
 * Notice the ***2*** prefix in the access rights. This is a **Special Permission Bit** that sets up **SGID**. 
@@ -48,8 +48,8 @@ given the same permissions like to group owner of the folder/file. We've already
 * Finally we need to remember to actually add our users to the mentioned group **sysadm**.
   
 ```
-[root@node1 ~]# usermod -aG sysadm harry
-[root@node1 ~]# usermod -aG sysadm natasha
+[root@rocky ~]# usermod -aG sysadm harry
+[root@rocky ~]# usermod -aG sysadm natasha
 ```
 
 * SUCCESS!!

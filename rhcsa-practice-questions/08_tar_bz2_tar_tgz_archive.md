@@ -1,4 +1,4 @@
-***On Node1***
+***On Rocky***
 
 # Create a tar archive of a file
 
@@ -17,7 +17,7 @@ Create a tar archive of "/etc/" Directory with .bz2 extension:
 
 * Use the -j to handle .bz2 compression:
 ```
-[root@node1 ~]# tar -cvjf /root/myetcbackup.tar.bz2 /etc/
+[root@rocky ~]# tar -cvjf /root/myetcbackup.tar.bz2 /etc/
 tar: Removing leading '/' from member names
 /etc/
 /etc/mtab
@@ -32,7 +32,7 @@ tar: Removing leading '/' from member names
 
 * OR if the question asks you to use .gz for compression, use -z instead:
 ```
-[root@node1 ~]# tar -cvzf /root/myetcbackup.tar.gz /etc/
+[root@rocky ~]# tar -cvzf /root/myetcbackup.tar.gz /etc/
 tar: Removing leading '/' from member names
 /etc/
 /etc/mtab
@@ -47,7 +47,7 @@ tar: Removing leading '/' from member names
 
 * OR if the question asks you to use .xz, use -J instead for compression:
 ```
-[root@node1 ~]# tar -cvJf /root/myetcbackup.tar.xz /etc/
+[root@rocky ~]# tar -cvJf /root/myetcbackup.tar.xz /etc/
 tar: Removing leading `/' from member names
 /etc/
 /etc/mtab

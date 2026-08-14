@@ -1,4 +1,4 @@
-***On Node2***
+***On Grace***
 
 # Configure Tuned
 
@@ -15,7 +15,7 @@ Configure the recommended tuned profile.
 
 * Install the "tuned" package:
 ```
-[root@node2 ~]# yum install tuned
+[root@grace ~]# yum install tuned
 Installed:
   hdparm-9.62-2.el9.x86_64             python3-linux-procfs-0.7.0-1.el9.noarch
   python3-perf-5.14.0-72.20.1.el9_0.x86_64  python3-pyudev-0.22.0-6.el9.noarch
@@ -25,12 +25,12 @@ Complete!
 
 * Start and enable the ```tuned``` service:
 ```
-[root@node2 ~]# systemctl enable --now tuned
+[root@grace ~]# systemctl enable --now tuned
 ```
 
 * Run ```tuned-adm list```:
 ```
-[root@node2 ~]# tuned-adm list
+[root@grace ~]# tuned-adm list
 Available profiles:
 - accelerator-performance         - Throughput performance based tuning with disabled high latency operations
 - balanced                        - General non-specialized tuned profile
@@ -50,17 +50,17 @@ Current active profile: virtual-guest
 
 * Run ```tuned-adm recommend```:
 ```
-[root@node2 ~]# tuned-adm recommend
+[root@grace ~]# tuned-adm recommend
 virtual-guest
 ```
 
 * Set the profile to the one recommended:
 ```
-[root@node2 ~]# tuned-adm profile virtual-host
+[root@grace ~]# tuned-adm profile virtual-host
 ```
 * To check which profile is active:
 ```
-[root@node2 ~]# tuned-adm active
+[root@grace ~]# tuned-adm active
 Current active profile: virtual-host
 ```
 

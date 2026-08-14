@@ -1,4 +1,4 @@
-***On Node1***
+***On Rocky***
 #  Search for string using grep and redirect the output
 
 ### QUESTION #12:
@@ -13,7 +13,7 @@ Find all strings "ich" from "/usr/share/dict/words" file and copy those strings 
 ### ANSWER #12:
 * The ```grep``` command provides what is needed:
 ```
-[root@node1 ~]# grep ich /usr/share/dict/words > /root/lines
+[root@rocky ~]# grep ich /usr/share/dict/words > /root/lines
 ```
 
 SUCCESS!!

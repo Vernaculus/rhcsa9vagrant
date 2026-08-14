@@ -1,4 +1,4 @@
-***On Node1***
+***On Rocky***
 
 # Configure file access control list (ACL) rights to a file
 
@@ -23,8 +23,8 @@ Copy the file /etc/fstab to /var/tmp. Configure the permissions of /var/tmp/fsta
 * We start with copying the file with permissions it already has:
 
 ```
-[root@node1 ~]# cp /etc/fstab /var/tmp
-[root@node1 ~]# ls -l /var/tmp/fstab
+[root@rocky ~]# cp /etc/fstab /var/tmp
+[root@rocky ~]# ls -l /var/tmp/fstab
 -rw-r--r--. 1 root root 583 Apr 23 08:52 /var/tmp/fstab
 ```
 
@@ -38,11 +38,11 @@ useradd harry
 * Setting special access rights to files/directories is achieved via **FACL**. The commands are:
 
 ```
-[root@node1 ~]# setfacl -m u:natasha:rw- /var/tmp/fstab
-[root@node1 ~]# setfacl -m u:harry:--- /var/tmp/fstab
+[root@rocky ~]# setfacl -m u:natasha:rw- /var/tmp/fstab
+[root@rocky ~]# setfacl -m u:harry:--- /var/tmp/fstab
 ```
 ```
-[root@node1 ~]# getfacl /var/tmp/fstab
+[root@rocky ~]# getfacl /var/tmp/fstab
 getfacl: Removing leading '/' from absolute path names
 # file: var/tmp/fstab
 # owner: root

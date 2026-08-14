@@ -1,4 +1,4 @@
-***On Node2***
+***On Grace***
 
 # Create swap partition
 
@@ -18,7 +18,7 @@ devices we can use is in order **pvs**, **vgs** and **lvs**. It shows all physic
 
 * First we create a logical volume that is mentioned in the question and we create swap on it:
 ```
-[root@node2 ~]# fdisk /dev/vdb
+[root@grace ~]# fdisk /dev/vdb
 
 Welcome to fdisk (util-linux 2.37.4).
 Changes will remain in memory only, until you decide to write them.
@@ -54,19 +54,19 @@ Changed type of partition 'Linux' to 'Linux swap / Solaris'.
 
 * Don’t forget to run partprobe:
 ```
-[root@node2 ~]# partprobe /dev/vdb
+[root@grace ~]# partprobe /dev/vdb
 ```
 Format the new swap partition on vdb2, then add it to the main swap:
-[root@node2 ~]# mkswap /dev/vdb2
+[root@grace ~]# mkswap /dev/vdb2
 Setting up swapspace version 1, size = 400 MiB (419426304 bytes)
 no label, UUID=9abc60cf-9d66-4d3a-8ffe-218770ee99ad
 ```
-[root@node2 ~]# swapon /dev/vdb2
+[root@grace ~]# swapon /dev/vdb2
 ```
 
 * Type “blkid” to find the UUID #:
 ```
-[root@node2 ~]# blkid | grep vdb2
+[root@grace ~]# blkid | grep vdb2
 /dev/vdb2: UUID="9abc60cf-9d66-4d3a-8ffe-218770ee99ad" TYPE="swap" PARTUUID="d0ae2e9f-02"
 ```
 
@@ -89,18 +89,18 @@ UUID=9abc60cf-9d66-4d3a-8ffe-218770ee99ad swap    swap    defaults        0 0
 ```
 
 ```
-[root@node2 ~]# systemctl daemon-reload
+[root@grace ~]# systemctl daemon-reload
 ```
 
 * Run “mount -a” to mount the swap partition:
 ```
-[root@node2 ~]# mount -a
+[root@grace ~]# mount -a
 ```
 
 * Run the ```swapon -s``` command to add the swap volume to the main swap volume:
  
 ```
-[root@node2 ~]# swapon -s
+[root@grace ~]# swapon -s
 Filename                                Type        Size    Used    Priority
 /dev/dm-1                               partition   1048572 0       -1
 /dev/vdb2                               partition   409596  0       -2

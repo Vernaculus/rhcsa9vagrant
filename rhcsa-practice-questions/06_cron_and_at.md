@@ -1,4 +1,4 @@
-***On Node1***
+***On Rocky***
 
 # Add entry to cron
 
@@ -16,7 +16,7 @@ Use Cron to setup two scheduled tasks:
 ### Answer #6:
 * You may reference the syntax setting up cron tasks by running:
 ```
-[root@node1 ~]# cat /etc/crontab
+[root@rocky ~]# cat /etc/crontab
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
@@ -35,9 +35,9 @@ MAILTO=root
 
 * Run the crontab command for user natasha:
 ```
-[root@node1 ~]# which logger
+[root@rocky ~]# which logger
 /bin/logger
-[root@node1 ~]# crontab -eu natasha
+[root@rocky ~]# crontab -eu natasha
 
 * * * * * /usr/bin/logger "Ex200 Testing"
 
@@ -47,7 +47,7 @@ MAILTO=root
 
 * Let's set another cron job an echo "Hello World" message which will go off at 2:30pm every day:
 ```
-[root@node1 ~]# crontab -eu natasha
+[root@rocky ~]# crontab -eu natasha
 
 * * * * * /bin/logger "Ex200 Testing"
 30 14 * * * /bin/echo "Hello World"
@@ -57,7 +57,7 @@ MAILTO=root
 
 * Now let's see what cron jobs are setup under user natasha:
 ```
-[root@node1 ~]# crontab -lu natasha
+[root@rocky ~]# crontab -lu natasha
 * * * * *    /usr/bin/logger "Ex200 Testing"
 30 14 * * * /bin/echo "Hello World"
 ```
@@ -70,28 +70,28 @@ The at command is used to schedule commands to be executed at a particular time 
 
 * Install the at package:
 ```
-[root@node1 ~]# install at
-[root@node1 ~]# systemctl enable --now atd
+[root@rocky ~]# install at
+[root@rocky ~]# systemctl enable --now atd
 ```
 
 * Schedule a task to run five minutes from the current time. It will create a text file in /tmp with the content "Hello, world!":
 ```
-[root@node1 ~]# echo "echo 'Hello, world!' > /tmp/hello.txt" | at now + 5 minutes
+[root@rocky ~]# echo "echo 'Hello, world!' > /tmp/hello.txt" | at now + 5 minutes
 ```
 
 * To list scheduled jobs:
 ```
-[root@node1 ~]# atq
+[root@rocky ~]# atq
 ```
 
 * View a specific job:
 ```
-[root@node1 ~]# at -c <job number>
+[root@rocky ~]# at -c <job number>
 ```
 
 * Remove a scheduled job:
 ```
-[root@node1 ~]# atrm <job number>
+[root@rocky ~]# atrm <job number>
 ```
 * For more information:
 ```

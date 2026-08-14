@@ -1,4 +1,4 @@
-***On Node2***
+***On Grace***
 
 # Create a Very Basic Application
 
@@ -15,18 +15,18 @@ Build an application rhcsa that print the message when logged in as ablerate use
 
 * Create the user if it doesn’t exist:
 ```
-[root@node2 ~]# useradd ablerate
-[root@node2 ~]# passwd ablerate
+[root@grace ~]# useradd ablerate
+[root@grace ~]# passwd ablerate
 Changing password for user ablerate.
 New password:
 Retype new password: 
 passwd: all authentication tokens updated successfully.
-[root@node2 ~]#
+[root@grace ~]#
 ```
 
 * Here we make a script-style application in /usr/local/bin called "rhcsa":
 ```
-[root@node2 ~]# vim /usr/local/bin/rhcsa
+[root@grace ~]# vim /usr/local/bin/rhcsa
 
 #! /bin/bash
 echo "Welcome to user ablerate"
@@ -37,12 +37,12 @@ echo "Welcome to user ablerate"
 
 * Next, we give executable permissions on that file:
 ```
-[root@node2 ~]# chmod +x /usr/local/bin/rhcsa
+[root@grace ~]# chmod +x /usr/local/bin/rhcsa
 ```
 
 * Edit the user's ```/home/abelrate/.bashrc```:
 ```
-[root@node2 ~]# vim /home/ablerate/.bashrc
+[root@grace ~]# vim /home/ablerate/.bashrc
 
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
@@ -61,13 +61,13 @@ fi
 
 * Double-check the permissions:
 ```
-[root@node2 ~]# ls -l /usr/local/bin/rhcsa
+[root@grace ~]# ls -l /usr/local/bin/rhcsa
 -rwxr-xr-x. 1 root root 44 Apr 23 09:48 /usr/local/bin/rhcsa
 ```
 
 * To check your work for the user’s welcome message:
 ```
-[root@node2 ~]# su - ablerate
+[root@grace ~]# su - ablerate
 Welcome to user ablerate.
 ```
 

@@ -1,6 +1,6 @@
 # Find Files Using Specific Parameters (Updated on 7/8/2025)
 
-***On Node1***
+***On Rocky***
 
 ### QUESTION #11 (Part 1):
 Find all the files in the `/etc` directory (not subdirectories) where the files were modified more than 180 days ago, then copy all of them to the `/var/tmp/pvt` directory.
@@ -54,7 +54,7 @@ cp /opt/filesearch.sh /usr/local/bin/
 ```
 
 ### QUESTION #11 (Part 3):
-On Node1, find all files in the system that have the setuid bit set and save their paths to `/root/setuid_files.txt`.
+On Rocky, find all files in the system that have the setuid bit set and save their paths to `/root/setuid_files.txt`.
 
 ***
 (scroll down for an answer)
@@ -72,7 +72,7 @@ find / -type f -perm -4000 -print > /root/setuid_files.txt 2>/dev/null
 ---
 
 ### QUESTION #11 (Part 4):
-On Node1, find all files in the system that have the setgid bit set and save their paths to `/root/setgid_files.txt`.
+On Rocky, find all files in the system that have the setgid bit set and save their paths to `/root/setgid_files.txt`.
 
 ***
 (scroll down for an answer)

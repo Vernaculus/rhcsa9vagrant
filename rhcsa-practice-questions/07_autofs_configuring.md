@@ -1,9 +1,9 @@
-***On Node1***
-# Configure autofs on Node1 (Updated on 7/8/2025)
+***On Rocky***
+# Configure autofs on Rocky (Updated on 7/8/2025)
 
-### QUESTION #7 [See Lab #00](https://github.com/RedHatRanger/rhcsa9vagrant/blob/main/rhcsa-practice-questions/00_ansible-nfs_server_configuring.md) YOU MUST SET THIS UP PRIOR TO STARTING THIS ONE!
+### QUESTION #7 [See Lab #00](https://github.com/RedHatRanger/rhcsa9vagrant/blob/main/rhcsa-practice-questions/00_hail-nfs_server_configuring.md) YOU MUST SET THIS UP PRIOR TO STARTING THIS ONE!
 Configure autofs to automount the home directories of remoteuserx user. Note the following: 
-   - remoteuserx's directory is exported via NFS, which is available on ansible.mydomain.com (192.168.99.10) and your NFS-exports directory is /ourhome/remoteuserx for remoteuserx, 
+   - remoteuserx's directory is exported via NFS, which is available on hail.hailmary.local (192.168.99.10) and your NFS-exports directory is /ourhome/remoteuserx for remoteuserx, 
    - remoteuserx's home directory should be automounted using autofs service. 
    - home directories must be writable by their users.
 ### DexTutor Tutorial can be found <a href="https://www.youtube.com/watch?v=uFpmRnAiB5k&list=PLlr7wO747mNrUoTuXhZ0REJw3hL4oWvLm&index=17">here</a> 
@@ -15,26 +15,26 @@ Configure autofs to automount the home directories of remoteuserx user. Note the
 
 ### ANSWER #7:
 
-###  * BEFORE YOU BEGIN THIS LAB, PLEASE START WITH ```LAB 00_ansible-nfs_server_configuration``` AND SETUP NFS ON THAT MACHINE. THEN YOU MAY PROCEED: ###
+###  * BEFORE YOU BEGIN THIS LAB, PLEASE START WITH ```LAB 00_hail-nfs_server_configuration``` AND SETUP NFS ON THAT MACHINE. THEN YOU MAY PROCEED: ###
 
-* You will need to create an NFS test user (On the exam it may already be created). This part is done on the NFS Server (ansible.mydomain.com or 192.168.99.10):
+* You will need to create an NFS test user (On the exam it may already be created). This part is done on the NFS Server (hail.hailmary.local or 192.168.99.10):
 ```
-[root@ansible ~]# groupadd -g 1234 autofsusers
-[root@ansible ~]# useradd -d /ourhome/remoteuserx -u 1234 -g autofsusers remoteuserx
-[root@ansible ~]# passwd remoteuserx
+[root@hail ~]# groupadd -g 1234 autofsusers
+[root@hail ~]# useradd -d /ourhome/remoteuserx -u 1234 -g autofsusers remoteuserx
+[root@hail ~]# passwd remoteuserx
 # Make sure to set a password for remoteuserx
 ```
 
 * Then, you need to install ```autofs``` and ```nfs-utils```:
 
 ```
-[root@node1 ~]# yum install -y autofs nfs-utils
-[root@node1 ~]# systemctl enable --now autofs
+[root@rocky ~]# yum install -y autofs nfs-utils
+[root@rocky ~]# systemctl enable --now autofs
 ```
 
 * Create a new autofs master map file for /ourhome:
 ```
-[root@node1 ~]# vim /etc/auto.master.d/ourhome.autofs
+[root@rocky ~]# vim /etc/auto.master.d/ourhome.autofs
 
 /ourhome        /etc/auto.ourhome
 
@@ -44,7 +44,7 @@ Configure autofs to automount the home directories of remoteuserx user. Note the
 
 * Create and Edit the Indirect Map File: Create and edit the ```/etc/auto.ourhome``` file. This file will define the specific automount for ```remoteuserx``` within the ```/ourhome``` base path.
 ```
-[root@node1 ~]# vim /etc/auto.ourhome
+[root@rocky ~]# vim /etc/auto.ourhome
 
 #
 # This is an automounter map and it has the following format
@@ -69,14 +69,14 @@ remoteuserx                 -rw,soft,intr                             192.168.99
 
 * Restart the ```autofs``` service. The ```mount -a``` command is not necessary for autofs as it's triggered on access.
 ```
-[root@node1 ~]# systemctl restart autofs
-[root@node1 ~]# mount -a
+[root@rocky ~]# systemctl restart autofs
+[root@rocky ~]# mount -a
 ```
 
 * Let's test it out, but before we do, notice that the partition is NOT YET MOUNTED:
 ```
-[root@node1 ~]# cd /ourhome
-[root@node1 ourhome]# df -h
+[root@rocky ~]# cd /ourhome
+[root@rocky ourhome]# df -h
 Filesystem            Size    Used    Avail   Use%    Mounted on
 devtmpfs              846M    0       846M    0%      /dev
 tmpfs                 875M    0       875M    0%      /dev/shm
@@ -93,7 +93,7 @@ tmpfs                 175M    92K     175M    1%      /run/user/0
 
 * Next, let's run ```ls``` and ```df -h``` within the ```/ourhome``` directory:
 ```
-[root@node1 ourhome]# ls
+[root@rocky ourhome]# ls
 remotueserx
 
 [root@192 ourhome]# df -h

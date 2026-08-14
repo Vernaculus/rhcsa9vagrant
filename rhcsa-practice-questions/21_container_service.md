@@ -2,7 +2,7 @@
 - Red Hat now provides a [FREE LAB](https://www.redhat.com/en/configure-a-rootless-podman-service) for this task
 
 <br><br>
-***On Node2***
+***On Grace***
 # Container Service
 
 ### QUESTION #21: 
@@ -21,12 +21,12 @@ And the user directory ```/opt/processed``` to container directory ```/opt/outgo
 
 ### ANSWER #21:
 ```
-[root@node2 ~]# mkdir /opt/files /opt/processed
-[root@node2 ~]# chown andrew:andrew /opt/files /opt/processed
-[root@node2 ~]# loginctl enable-linger andrew
-[root@node2 ~]# ssh andrew@localhost
-[andrew@node2 ~]$ podman run -d --name myapp -v /opt/files/:/opt/incoming:Z -v /opt/processed/:/opt/outgoing:Z myapp
-[andrew@node2 ~]$ podman ps
+[root@grace ~]# mkdir /opt/files /opt/processed
+[root@grace ~]# chown andrew:andrew /opt/files /opt/processed
+[root@grace ~]# loginctl enable-linger andrew
+[root@grace ~]# ssh andrew@localhost
+[andrew@grace ~]$ podman run -d --name myapp -v /opt/files/:/opt/incoming:Z -v /opt/processed/:/opt/outgoing:Z myapp
+[andrew@grace ~]$ podman ps
 
 CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS          PORTS                 NAMES
 af03e63960ad   localhost/myapp                 /usr/bin/run-http...    3 seconds ago   Up 3 seconds                           myapp
@@ -35,7 +35,7 @@ af03e63960ad   localhost/myapp                 /usr/bin/run-http...    3 seconds
 * Let's see if Andrew has the right permissions to have Linger:
 
 ```
-[andrew@node2 ~]$ loginctl show-user andrew
+[andrew@grace ~]$ loginctl show-user andrew
 ID=1002
 ...
 Timestamp=Sun 2023-04-23 09:54:45 IST
@@ -54,20 +54,20 @@ Linger=yes
 
 * Next, we need to create a folder in the user’s directory called ```~/.config/systemd/user```:
 ```
-[andrew@node2 ~]$ mkdir -p ~/.config/systemd/user
-[andrew@node2 ~]$ cd ~/.config/systemd/user
+[andrew@grace ~]$ mkdir -p ~/.config/systemd/user
+[andrew@grace ~]$ cd ~/.config/systemd/user
 ```
 
 * We need to generate the service file in that directory: 
 ```
-[andrew@node2 user]$ podman generate systemd --name myapp --new --files
+[andrew@grace user]$ podman generate systemd --name myapp --new --files
 /home/andrew/.config/systemd/user/container-myapp.service
-[andrew@node2 user]$ systemctl --user daemon-reload
+[andrew@grace user]$ systemctl --user daemon-reload
 ```
 
 * Next, stop the running container:
 ```
-[andrew@node2 user]$ podman stop myapp
+[andrew@grace user]$ podman stop myapp
 ```
 
 * Now start & enable the service:

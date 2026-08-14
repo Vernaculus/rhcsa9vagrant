@@ -1,6 +1,6 @@
-***On Ansible-NFS Server***
+***On Hail (NFS Server)***
 
-# Setting Up Passwordless login from Ansible to Node1 and Node2
+# Setting Up Passwordless login from Hail to Rocky and Grace
 
 ### QUESTION #00:
 Create SSH keys so that you can connnect to remote servers without a password.
@@ -15,25 +15,25 @@ Create SSH keys so that you can connnect to remote servers without a password.
 
 * Create the user ansible ON ALL 3 systems:
 ```
-[root@ansible ~]# useradd -G wheel ansible; newgrp
-[root@node1 ~]# useradd -G wheel ansible; newgrp
-[root@node2 ~]# useradd -G wheel ansible; newgrp
+[root@hail ~]# useradd -G wheel ansible; newgrp
+[root@rocky ~]# useradd -G wheel ansible; newgrp
+[root@grace ~]# useradd -G wheel ansible; newgrp
 ```
 
 * Generate the key:
 ```
-[root@ansible ~]# ssh-keygen -t rsa -b 4096 -N ""
-[root@ansible ~]# for i in {1..2}; do ssh-copy-id -i ~/.ssh/id_rsa.pub node${i}; done
+[root@hail ~]# ssh-keygen -t rsa -b 4096 -N ""
+[root@hail ~]# for host in rocky grace; do ssh-copy-id -i ~/.ssh/id_rsa.pub $host; done
 (Enter the ansible user's password for both nodes)
 ```
 
 * Then test out login without a password:
 ```
-[root@ansible ~]# ssh ansible@node1
-[ansible@node1 ~]$ exit
-[root@ansible ~]# ssh ansible@node2
-[ansible@node2 ~]$ exit
-[root@ansible ~]# 
+[root@hail ~]# ssh ansible@rocky
+[ansible@rocky ~]$ exit
+[root@hail ~]# ssh ansible@grace
+[ansible@grace ~]$ exit
+[root@hail ~]# 
 ```
 
 * SUCCESS!!

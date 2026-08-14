@@ -2,7 +2,7 @@
 
 
 <br><br>
-***On Node2***
+***On Grace***
 
 # Lab #15: Logical Volume Management (LVM)
 
@@ -27,7 +27,7 @@ DexTutor's tutorial can be found <a href="https://www.youtube.com/watch?v=N3HFDv
 
 ### Step 1: Verify Attached Storage
 ```bash
-[root@node2 ~]# lsblk
+[root@grace ~]# lsblk
 NAME           MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
 sro              11:0    1 1024M  0 rom
 vda            252:0    0   10G  0 disk
@@ -43,9 +43,9 @@ vdd            252:18   0    4G  0 disk
 ### Step 2: Prepare Disks with parted
 Execute these commands for each new disk (`/dev/vdb`, `/dev/vdc`, `/dev/vdd`):
 ```bash
-[root@node2 ~]# parted /dev/vdb mklabel gpt
-[root@node2 ~]# parted -s /dev/vdb mkpart primary xfs 0% 100%
-[root@node2 ~]# parted /dev/vdb set 1 lvm on
+[root@grace ~]# parted /dev/vdb mklabel gpt
+[root@grace ~]# parted -s /dev/vdb mkpart primary xfs 0% 100%
+[root@grace ~]# parted /dev/vdb set 1 lvm on
 ```
 >Repeat similarly for `/dev/vdc` and `/dev/vdd`.
 
@@ -56,10 +56,10 @@ lsblk
 
 ### Step 4: Create Physical Volumes
 ```bash
-[root@node2 ~]# pvcreate /dev/vdb /dev/vdc /dev/vdd
+[root@grace ~]# pvcreate /dev/vdb /dev/vdc /dev/vdd
 
 # We can verify that they are available:
-[root@node2 ~]# pvs
+[root@grace ~]# pvs
 PU           VG      Fmt    Attr    PSize   PFree
 /dev/sdb             1um2   ---     6.00g   6.00g
 /dev/sdc             1vm2   ---     5.00g   5.00g
@@ -68,40 +68,40 @@ PU           VG      Fmt    Attr    PSize   PFree
 
 ### Step 5: Create Volume Group
 ```bash
-[root@node2 ~]# vgcreate VG1 /dev/sdb /dev/sdc
+[root@grace ~]# vgcreate VG1 /dev/sdb /dev/sdc
   Volume group "VG1" successfully created
 
 # Verify the new VG1 has been created:
-[root@node2 ~]# vgs
+[root@grace ~]# vgs
 VG   #PU  #LV #SN Attr     VSize   VFree
 VG1  2    0   0   wz--n-   10.99g  10.99g
 ```
 
 ### Step 6: Create Logical Volume (LV1) using 8GB
 ```bash
-[root@node2 ~]# lvcreate -L 8Gb -n LV1 VG1
+[root@grace ~]# lvcreate -L 8Gb -n LV1 VG1
   Logical volume "LV1" created.
 
 # Verify:
-[root@node2 ~]# lvs
+[root@grace ~]# lvs
 LV     VG     Attr      LSize  Pool Origin Data Metax Move Log Cy Sync Convert
 LV1    VG1    wi-a--    8.00g
 ```
 
 ### Step 7: Format and Mount Logical Volume
 ```bash
-[root@node2 ~]# mkfs.xfs /dev/VG1/LV1
-[root@node2 ~]# mkdir /lv
+[root@grace ~]# mkfs.xfs /dev/VG1/LV1
+[root@grace ~]# mkdir /lv
 ```
 
 ### Step 8: Automate Mounting with `/etc/fstab`
 ```bash
-[root@node2 ~]# echo "/dev/VG1/LV1 /lv xfs defaults,nodev 0 0" >> /etc/fstab
+[root@grace ~]# echo "/dev/VG1/LV1 /lv xfs defaults,nodev 0 0" >> /etc/fstab
 ```
 
 ### Step 9: Instantly mount the LVM without a reboot
 ```bash
-[root@node2 ~]# mount -a
+[root@grace ~]# mount -a
 ```
 
 * SUCCESS!!
@@ -121,29 +121,29 @@ Again, DexTutor's tutorial can be found <a href="https://www.youtube.com/watch?v
 ### Step 1: Extend Logical Volume by 2GB
 Check available space first:
 ```bash
-[root@node2 ~]# vgs
+[root@grace ~]# vgs
 VG   #PV  #LV #SN   Attr     VSize   VFree
 VG1  2    1   0     wz--n-   10.99g  2.99g
 ```
 
 >If space permits on VG1 with the 2 physical disks:
 ```bash
-[root@node2 ~]# lvextend -r -L +2G /dev/VG1/LV1
+[root@grace ~]# lvextend -r -L +2G /dev/VG1/LV1
 
 # Verify:
-[root@node2 ~]# lvs
+[root@grace ~]# lvs
 ```
 
 ### Step 2: Extend Volume Group VG1 to /dev/sdd
 If you need more space:
 ```bash
-[root@node2 ~]# vgextend VG1 /dev/vdd
-[root@node2 ~]# lvextend -r -L +2G /dev/VG1/LV1
+[root@grace ~]# vgextend VG1 /dev/vdd
+[root@grace ~]# lvextend -r -L +2G /dev/VG1/LV1
 ```
 
 ### Step 3: Verify New Size
 ```bash
-[root@node2 ~]# df -h
+[root@grace ~]# df -h
 ```
 
 * SUCCESS!!
@@ -162,30 +162,30 @@ DexTutor's tutorial can be found <a href="https://www.youtube.com/watch?v=N3HFDv
 **Step 1: Check Current Volume Group Configuration**
 
 ```bash
-[root@node2 ~]# vgdisplay
+[root@grace ~]# vgdisplay
 ```
 
 **Step 2: If current PE size isn't 8MB, recreate the volume group:**
 
 ```bash
-[root@node2 ~]# umount -l /lv
-[root@node2 ~]# lvchange -an /dev/VG1/LV1
-[root@node2 ~]# lvremove /dev/VG1/LV1
-[root@node2 ~]# vgremove VG1
+[root@grace ~]# umount -l /lv
+[root@grace ~]# lvchange -an /dev/VG1/LV1
+[root@grace ~]# lvremove /dev/VG1/LV1
+[root@grace ~]# vgremove VG1
 ```
 
 **Step 3: Create a new Volume Group with 8MB extents:**
 
 ```bash
-[root@node2 ~]# vgcreate -s 8MB VG1 /dev/vdb
-[root@node2 ~]# vgdisplay VG1
+[root@grace ~]# vgcreate -s 8MB VG1 /dev/vdb
+[root@grace ~]# vgdisplay VG1
 ```
 
 **Step 4: Create Logical Volume `LV2` with 10 extents:**
 
 ```bash
-[root@node2 ~]# lvcreate -l 10 -n LV2 VG1
-[root@node2 ~]# lvs
+[root@grace ~]# lvcreate -l 10 -n LV2 VG1
+[root@grace ~]# lvs
 ```
 
 Your Logical Volume `LV2` is now set up successfully with custom extent size.
@@ -196,12 +196,12 @@ Your Logical Volume `LV2` is now set up successfully with custom extent size.
 ### Troubleshooting:
 Remove existing configuration if required and recreate:
 ```bash
-[root@node2 ~]# umount -l /lv
-[root@node2 ~]# lvchange -an /dev/VG1/LV1
-[root@node2 ~]# lvremove /dev/VG1/LV1
-[root@node2 ~]# vgremove VG1
-[root@node2 ~]# vgcreate -s 8MB VG1 /dev/vdb
-[root@node2 ~]# vgdisplay VG1
+[root@grace ~]# umount -l /lv
+[root@grace ~]# lvchange -an /dev/VG1/LV1
+[root@grace ~]# lvremove /dev/VG1/LV1
+[root@grace ~]# vgremove VG1
+[root@grace ~]# vgcreate -s 8MB VG1 /dev/vdb
+[root@grace ~]# vgdisplay VG1
 ```
 
 ---

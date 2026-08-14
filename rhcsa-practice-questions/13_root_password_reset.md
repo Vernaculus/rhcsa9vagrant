@@ -3,11 +3,11 @@
 Tutorial Video Link [Here](https://www.youtube.com/watch?v=-ZH4M-VShN8)
 
 <br><br>
-***On Node2***
-# Reset the root password on Node2 / "Breaking into the System"
+***On Grace***
+# Reset the root password on Grace / "Breaking into the System"
 
 ### QUESTION #13:
-You do not know the root password on ```Node2```, but You have physical access to the machine. Create a new root password and log into the system.
+You do not know the root password on ```Grace```, but You have physical access to the machine. Create a new root password and log into the system.
  (It can be preliminary task for starting Your exam. It is crucial to know this procedure by heart.)
 ***
 (scroll down for an answer)

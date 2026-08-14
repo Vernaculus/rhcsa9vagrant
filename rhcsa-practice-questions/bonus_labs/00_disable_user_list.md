@@ -1,4 +1,4 @@
-***On Ansible-NFS Server***
+***On Hail-NFS Server***
 
 # The User List Needs to Be Disabled for Security Reasons
 
@@ -15,13 +15,13 @@ Disable the user list from showing up on the graphical user login (Gnome Display
 
 * Disable the user list:
 ```
-[root@ansible ~]# touch /etc/dconf/db/gdm.d/00-disable-user-list
-[root@ansible ~]# cat << EOF >> /etc/dconf/db/gdm.d/00-disable-user-list
+[root@hail ~]# touch /etc/dconf/db/gdm.d/00-disable-user-list
+[root@hail ~]# cat << EOF >> /etc/dconf/db/gdm.d/00-disable-user-list
 [org/gnome/login-screen]
 disable-user-list=true
 EOF
-[root@ansible ~]# dconf update
-[root@ansible ~]# systemctl restart gdm
+[root@hail ~]# dconf update
+[root@hail ~]# systemctl restart gdm
 ```
 
 * SUCCESS!!

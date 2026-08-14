@@ -1,9 +1,9 @@
-***On Node1***
+***On Rocky***
 
-# Configure the yum repository for Node1
+# Configure the yum repository for Rocky
 
 ### QUESTION #2:
-Configure Your Node1 VM repository installed the packages distribution is available via YUM: \
+Configure Your Rocky VM repository installed the packages distribution is available via YUM: \
     - baseos url=https://download.rockylinux.org/pub/rocky/8/BaseOS/x86_64/os/ \
     - appstream url=https://download.rockylinux.org/pub/rocky/8/AppStream/x86_64/os/
 
@@ -16,7 +16,7 @@ Configure Your Node1 VM repository installed the packages distribution is availa
 ### ANSWER #2:
 
 ```
-[root@node1 ~]# vim /etc/yum.repos.d/pkgs.repo
+[root@rocky ~]# vim /etc/yum.repos.d/pkgs.repo
 
 [BaseOS]
 name=base
@@ -36,8 +36,8 @@ enabled=1
 
 * To confirm it is configured:
 ```
-[root@node1 ~]# yum clean all
-[root@node1 ~]# yum repolist all
+[root@rocky ~]# yum clean all
+[root@rocky ~]# yum repolist all
 ```
 
 * Both should be enabled

@@ -1,12 +1,12 @@
 ## UPDATED ON 2025-03-10:
 
 <br><br>
-***On Node2***
+***On Grace***
 
 # Configure Yum Repository
 
 ### QUESTION #14:
-Configure Your Node2 VM repository installed the packages distribution is available via YUM: \
+Configure Your Grace VM repository installed the packages distribution is available via YUM: \
      - baseos url=https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/ \
      - appstream url=https://download.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/ 
 
@@ -18,9 +18,9 @@ Configure Your Node2 VM repository installed the packages distribution is availa
 
 ### ANSWER #14:
 
-* First, let's create the repository.  You can copy the text from Node1's /etc/yum.repos.d/pkg.repo:
+* First, let's create the repository.  You can copy the text from Rocky's /etc/yum.repos.d/pkg.repo:
 ```
-[root@node2 ~]# vim /etc/yum.repos.d/pkg.repo
+[root@grace ~]# vim /etc/yum.repos.d/pkg.repo
 
 [BaseOS]
 name=BaseOS
@@ -39,5 +39,5 @@ enabled=1
 ```
 
 ```
-[root@node2 ~]# yum repolist
+[root@grace ~]# yum repolist
 ```

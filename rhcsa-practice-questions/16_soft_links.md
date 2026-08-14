@@ -1,4 +1,4 @@
-***On Node2***
+***On Grace***
 # Create a Soft Link
 
 ### QUESTION #16:
@@ -17,15 +17,15 @@ then the location you want to put it.
 * ***THE SYNTAX IS*** ```ln -s <src> <dst>```
 
 ```
-[root@node2 ~]# ln -s /var/log/messages /root
-[root@node2 ~]# ls -l /root
+[root@grace ~]# ln -s /var/log/messages /root
+[root@grace ~]# ls -l /root
 -rw-r--r--. 1 root root  591 Nov  2  2022 google-cloud.repo
 lrwxrwxrwx. 1 root root   17 May  2 19:06 messages -> /var/log/messages
 -rw-r--r--. 1 root root   54 May  2 19:04 post-run.log
 -rw-r--r--. 1 root root 5121 Jun  3  2022 rh-cloud.repo
 -rw-r--r--. 1 root root   43 May  2 19:03 webconsoleurl.txt
 
-[root@node2 ~]# tail -n 5 /root/messages
+[root@grace ~]# tail -n 5 /root/messages
 May  2 19:05:54 rhel-9-1-6-20-2023 systemd[1]: cockpit-wsinstance-http.socket: Deactivated successfully.
 May  2 19:05:54 rhel-9-1-6-20-2023 systemd[1]: Closed Socket for Cockpit Web Service http instance.
 May  2 19:05:54 rhel-9-1-6-20-2023 systemd[1]: cockpit-wsinstance-https-factory.socket: Deactivated successfully.
@@ -36,9 +36,9 @@ total 20
 
 * Now, let's check the inode number on the far left of the output.  They should be different:
 ```
-[root@node2 ~]# ls -li /var/log/messages
+[root@grace ~]# ls -li /var/log/messages
 5850 -rw-------. 1 root root 130632 May  2 19:13 /var/log/messages
-root@node2:~# ls -li /root/messages
+root@grace:~# ls -li /root/messages
 295363 lrwxrwxrwx. 1 root root 17 May  2 19:06 /root/messages -> /var/log/messages
 ```
 

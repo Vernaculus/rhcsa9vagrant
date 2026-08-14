@@ -2,7 +2,7 @@
 
 Official Red Hat Practice Lab [Here](https://zero.apps.open.redhat.com/interactive-labs/zt-rhel.zt-user-basics.prod)
 
-***On Node1***
+***On Rocky***
 
 # Create users and assign them to secondary groups
 
@@ -46,14 +46,14 @@ PASS_WARN_AGE   7
 :wq
 ```
 ```
-[root@node1 ~]# groupadd sysadm
-[root@node1 ~]# useradd -G sysadm harry
-[root@node1 ~]# useradd -G sysadm natasha
-[root@node1 ~]# useradd sarah -s /sbin/nologin
+[root@rocky ~]# groupadd sysadm
+[root@rocky ~]# useradd -G sysadm harry
+[root@rocky ~]# useradd -G sysadm natasha
+[root@rocky ~]# useradd sarah -s /sbin/nologin
 
-[root@node1 ~]# passwd harry  # provide password for harry
-[root@node1 ~]# passwd natasha   # provide password for natasha
-[root@node1 ~]# passwd sarah   # provide password for sarah
+[root@rocky ~]# passwd harry  # provide password for harry
+[root@rocky ~]# passwd natasha   # provide password for natasha
+[root@rocky ~]# passwd sarah   # provide password for sarah
 ```
 
 * Be sure to run “passwd” for all users to assign passwords.  You can alternatively run
@@ -63,17 +63,17 @@ PASS_WARN_AGE   7
 * To make sure what groups the users belong to here are the commands:
 
 ```
-[root@node1 ~]# id {harry,natasha,sarah}
+[root@rocky ~]# id {harry,natasha,sarah}
 ```
 
 * You can try to login as **sarah** but it should not work:
 ```
-[root@node1 ~]# su - sarah
+[root@rocky ~]# su - sarah
 ```
 
 * Next, we need to search for the binary path of the command useradd so we can update the sudoers file: 
 ```
-[root@node1 ~]# visudo
+[root@rocky ~]# visudo
 ```
 ADD THIS LINE BELOW THE %wheel LINE: <br/>
 ```
@@ -95,8 +95,8 @@ harry ALL=(ALL) NOPASSWD: /usr/bin/passwd
 ### Note: You can alternatively:
 If you just performed ```useradd harry``` and ```useradd natasha``` only, you can modify their memberships:
 ```
-[root@node1 ~]# usermod -aG sysadm harry
-[root@node1 ~]# usermod -aG sysadm natasha
+[root@rocky ~]# usermod -aG sysadm harry
+[root@rocky ~]# usermod -aG sysadm natasha
 ```
 
 * You can set the primary group by using a little "g" instead.

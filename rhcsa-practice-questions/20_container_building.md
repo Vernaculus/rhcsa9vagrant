@@ -1,6 +1,6 @@
 [Why Use Containers?](#Containers101)
 
-***On Node2***
+***On Grace***
 # Container Build
 
 ### QUESTION #20:
@@ -17,12 +17,12 @@ Download containerfile from https://github.com/sachinyadav3496/Text-To-PDF/archi
 ### ANSWER #20:
 * First, you will need to install the Container Management Group packages:
 ```
-[root@node2 ~]# yum install @”Container Management"
+[root@grace ~]# yum install @”Container Management"
 ```
 * Then, switch to the account of user that will be running the container (It is assumed that user named `andrew` exists on the system):
 
 ```
-[root@node2 ~]# ssh andrew@localhost
+[root@grace ~]# ssh andrew@localhost
 [andrew@localhost ~]$ wget https://github.com/sachinyadav3496/Text-To-PDF/archive/refs/heads/master.zip
 [andrew@localhost ~]$ unzip master.zip
 [andrew@localhost ~]$ rm -rf master.zip
