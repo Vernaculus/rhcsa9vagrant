@@ -34,7 +34,7 @@ Option 1: EASY (GUI Configuration)
 
 Option 2: One-liner Command:
 ```
-[root@rocky ~]# nmcli con mod eth1 ipv4.method manual ipv4.addresses 172.24.40.40/24 ipv4.gateway 172.24.40.1 ipv4.dns 172.24.40.1
+[root@rocky ~]# nmcli con mod eth1 ipv4.method manual ipv4.addresses 192.168.99.67/24 ipv4.gateway 192.168.99.1 ipv4.dns 192.168.99.1
 ```   
 
 * Then:
