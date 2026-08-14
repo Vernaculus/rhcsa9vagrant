@@ -19,6 +19,10 @@ FIX SELINUX PORT ISSUES:
 
 ```
 # THE SETUP:
+[root@rocky ~]# dnf install -y httpd
+[root@rocky ~]# systemctl enable --now httpd
+[root@rocky ~]# echo "<H1> Welcome to RHCSA Exam !!!! </H1>" > /var/www/html/index.html
+
 vim /etc/httpd/conf/httpd.conf
 # change the port number from 80 to 82
 :wq
