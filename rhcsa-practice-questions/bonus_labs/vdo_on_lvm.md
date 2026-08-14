@@ -18,7 +18,7 @@ Create a VDO named vdo1 of size 50Gb and mount it at /vdo_m.
 * First, attach storage to your physical or virtual machine. Then, run:
 ```
 lsblk
-yum -y update
+dnf -y update
 ```
 ```
 init 6
@@ -27,7 +27,7 @@ init 6
 * After reboot, install ```lvm2```, ```vdo```, and ```kmod-kvdo```.  Then create the volume group: 
 
 ```
-yum -y install lvm2 vdo kmod-kvdo
+dnf -y install lvm2 vdo kmod-kvdo
 ```
 ![image](https://github.com/RedHatRanger/rhcsa9vagrant/assets/90477448/a44b80b3-536e-48ad-a9c7-77ee3cdf33bb)
  

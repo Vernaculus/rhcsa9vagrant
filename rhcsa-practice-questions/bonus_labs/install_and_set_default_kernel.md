@@ -13,13 +13,13 @@ Install the kernel from the source http://some.link/to/kernel. The following cri
 
 ### Answer:
 
-* In order to get new kernel from specified link You should add this link as a repository that can be seen by **YUM**.
+* In order to get new kernel from specified link You should add this link as a repository that can be seen by **DNF**.
 The procedure for adding a repository was described in question **016** so I won't be repeating myself here.
 
-* After the repo is added, enabled and visible by **YUM** the command is: 
+* After the repo is added, enabled and visible by **DNF** the command is: 
 
 ```
-yum install kernel  
+dnf install kernel  
 ```
 
 * Mentioned criteria are actually not a problem as this is the default behaviour - the kernel is not itself updated but

@@ -90,7 +90,7 @@ firewall-cmd --reload
 
 ### BONUS: Alternate lab from Red Hat:
 ```
-yum install -y podman
+dnf install -y podman
 mkdir -p ~/.config/containers/systemd/
 
 cat << EOF > ~/.config/containers/systemd/httpd.container

@@ -3,10 +3,10 @@
 <br><br>
 ***On Grace***
 
-# Configure Yum Repository
+# Configure DNF Repository
 
 ### QUESTION #14:
-Configure Your Grace VM repository installed the packages distribution is available via YUM: \
+Configure Your Grace VM repository installed the packages distribution is available via DNF: \
      - baseos url=https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/ \
      - appstream url=https://download.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/ 
 
@@ -39,5 +39,5 @@ enabled=1
 ```
 
 ```
-[root@grace ~]# yum repolist
+[root@grace ~]# dnf repolist
 ```

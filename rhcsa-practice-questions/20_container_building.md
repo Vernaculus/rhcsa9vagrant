@@ -17,7 +17,7 @@ Download containerfile from https://github.com/sachinyadav3496/Text-To-PDF/archi
 ### ANSWER #20:
 * First, you will need to install the Container Management Group packages:
 ```
-[root@grace ~]# yum install @”Container Management"
+[root@grace ~]# dnf install @”Container Management"
 ```
 * Then, switch to the account of user that will be running the container (It is assumed that user named `andrew` exists on the system):
 
@@ -112,9 +112,9 @@ From a security standpoint, running with fewer privileges reduces risk. Podman a
 1. **Install dependencies:
 
    ```bash
-   sudo yum install slirp4netns podman -y
+   sudo dnf install slirp4netns podman -y
    # Or install the Container Tools module:
-   sudo yum install @container-tools -y
+   sudo dnf install @container-tools -y
    ```
    - `slirp4netns` provides network connectivity in an unprivileged user namespace.
 

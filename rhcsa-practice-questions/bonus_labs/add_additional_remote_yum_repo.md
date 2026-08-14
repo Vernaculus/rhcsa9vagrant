@@ -1,7 +1,7 @@
-# Add new remote repository for YUM
+# Add new remote repository for DNF
 
 ### Question:
-Add additional repository for YUM with name **my_custom_repo** which can be found via URL **http://local.repo/rhel7**
+Add additional repository for DNF with name **my_custom_repo** which can be found via URL **http://local.repo/rhel7**
 
 ***
 (scroll down for an answer)
@@ -11,11 +11,11 @@ Add additional repository for YUM with name **my_custom_repo** which can be foun
 
 ### Answer:
 
-* **YUM** repositories are configured mostly in the file **/etc/yum.conf**. We can see the total contents of this file with
-added formatting using command (if it is not installed You can find it in the **yum-utils** package):
+* **DNF** repositories are configured mostly in the file **/etc/dnf/dnf.conf**. We can see the total contents of this file with
+added formatting using command (if it is not installed You can find it in the **dnf-plugins-core** package):
 
 ```
-yum-config-manager
+dnf config-manager
 ```
 
 * Among the properties listed in this file is **reposdir** which specifies (by default) paths to folders which are being scanned for
@@ -32,10 +32,10 @@ baseurl=http://local.repo/rhel7
 enabled=1
 ```
 
-* Suppose the contents of the repo file is too hard to remember, you can alternatively use `yum-config-manager` to add a new repo and rename it later.
+* Suppose the contents of the repo file is too hard to remember, you can alternatively use `dnf config-manager` to add a new repo and rename it later.
 
 ```
-yum-config-manager --add-repo="http://local.repo/rhel7"
+dnf config-manager --add-repo="http://local.repo/rhel7"
 
 ```
 * This will create a new repo file in `/etc/yum.repos.d/local.repo_rhel7.repo` with the following contents.
@@ -54,12 +54,12 @@ baseurl=http://local.repo/rhel7
 enabled=1
 ```
 
-* Make sure that repository is seen by YUM:
+* Make sure that repository is seen by DNF:
 
 ```
-yum repolist | grep my_custom_repo
+dnf repolist | grep my_custom_repo
 * or other (which is more readable)
-yum-config-manager my_custom_repo 
+dnf config-manager my_custom_repo 
 ```
 **Note:** You might encounter gpg check failures when you add a new repo, so skip gpg checks in that case append to the new repo file the following.
 ```

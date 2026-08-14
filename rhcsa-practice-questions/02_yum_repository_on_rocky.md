@@ -1,11 +1,11 @@
 ***On Rocky***
 
-# Configure the yum repository for Rocky
+# Configure the dnf repository for Rocky
 
 ### QUESTION #2:
-Configure Your Rocky VM repository installed the packages distribution is available via YUM: \
-    - baseos url=https://download.rockylinux.org/pub/rocky/8/BaseOS/x86_64/os/ \
-    - appstream url=https://download.rockylinux.org/pub/rocky/8/AppStream/x86_64/os/
+Configure Your Rocky VM repository installed the packages distribution is available via DNF: \
+    - baseos url=https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/ \
+    - appstream url=https://download.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/
 
 ***
 (scroll down for an answer)
@@ -20,13 +20,13 @@ Configure Your Rocky VM repository installed the packages distribution is availa
 
 [BaseOS]
 name=base
-baseurl=https://download.rockylinux.org/pub/rocky/8/BaseOS/x86_64/os/
+baseurl=https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/
 gpgcheck=1
 enabled=1
 
 [AppStream]
 name=app
-baseurl=https://download.rockylinux.org/pub/rocky/8/AppStream/x86_64/os/
+baseurl=https://download.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/
 gpgcheck=1
 enabled=1
 
@@ -36,8 +36,8 @@ enabled=1
 
 * To confirm it is configured:
 ```
-[root@rocky ~]# yum clean all
-[root@rocky ~]# yum repolist all
+[root@rocky ~]# dnf clean all
+[root@rocky ~]# dnf repolist all
 ```
 
 * Both should be enabled

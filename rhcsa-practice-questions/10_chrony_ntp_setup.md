@@ -14,7 +14,7 @@ Configure your system to synchronize the time to the Hail Workstation, ```hail.h
 ### ANSWER #10:
 * Install and configure ```chronyd``` on Rocky:
 ```
-[root@rocky ~]# yum install chrony
+[root@rocky ~]# dnf install chrony
 [root@rocky ~]# vim /etc/chrony.conf
 ```
 * Comment out the 'pool' line and add this 'server' line below it:

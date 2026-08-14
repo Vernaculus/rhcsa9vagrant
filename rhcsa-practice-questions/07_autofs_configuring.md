@@ -28,7 +28,7 @@ Configure autofs to automount the home directories of remoteuserx user. Note the
 * Then, you need to install ```autofs``` and ```nfs-utils```:
 
 ```
-[root@rocky ~]# yum install -y autofs nfs-utils
+[root@rocky ~]# dnf install -y autofs nfs-utils
 [root@rocky ~]# systemctl enable --now autofs
 ```
 

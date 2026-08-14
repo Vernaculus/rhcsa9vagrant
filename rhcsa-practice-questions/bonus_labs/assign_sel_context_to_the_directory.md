@@ -15,10 +15,10 @@ Assign the same **SELinux** contexts used by the home directories to the **/xfs*
 what is the package name we need:
 
 ```
-yum whatprovides */semanage
+dnf whatprovides */semanage
 ```
 
-* On my system (CentOS) it was **policycoreutils-python** with additional architecture/version suffix. This is what must be installed using **YUM**.
+* On my system (CentOS) it was **policycoreutils-python** with additional architecture/version suffix. This is what must be installed using **DNF**.
 
 * There is a command called **chcon** - however its usage is not advised (besides restoring root password)!
 

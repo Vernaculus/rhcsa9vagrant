@@ -15,7 +15,7 @@ Configure the recommended tuned profile.
 
 * Install the "tuned" package:
 ```
-[root@grace ~]# yum install tuned
+[root@grace ~]# dnf install tuned
 Installed:
   hdparm-9.62-2.el9.x86_64             python3-linux-procfs-0.7.0-1.el9.noarch
   python3-perf-5.14.0-72.20.1.el9_0.x86_64  python3-pyudev-0.22.0-6.el9.noarch

@@ -4,7 +4,7 @@
 
 * First, install the required packages:
 ```
-[root@hail ~]# yum install -y nfs* rpc*
+[root@hail ~]# dnf install -y nfs* rpc*
 ```
 
 * Start and Enable the service:
