@@ -16,6 +16,7 @@
 * Setup the shared directory: 
 ```
 [root@hail ~]# mkdir -p /ourhome/remoteuserx
+[root@hail ~]# mkdir /shared
 [root@hail ~]# chmod 2770 /shared
 ```
 
