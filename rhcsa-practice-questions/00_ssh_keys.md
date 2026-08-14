@@ -13,17 +13,17 @@ Create SSH keys so that you can connnect to remote servers without a password.
 
 ### ANSWER #00:
 
-* Create the user ansible ON ALL 3 systems:
+* Create the user ansible ON ALL 3 systems and set a password:
 ```
-[root@hail ~]# useradd -G wheel ansible; newgrp
-[root@rocky ~]# useradd -G wheel ansible; newgrp
-[root@grace ~]# useradd -G wheel ansible; newgrp
+[root@hail ~]# useradd -G wheel ansible; newgrp && passwd ansible
+[root@rocky ~]# useradd -G wheel ansible; newgrp && passwd ansible
+[root@grace ~]# useradd -G wheel ansible; newgrp && passwd ansible
 ```
 
-* Generate the key:
+* Generate the key as ansible user on hail then copy over to rocky and grace:
 ```
-[root@hail ~]# ssh-keygen -t rsa -b 4096 -N ""
-[root@hail ~]# for host in rocky grace; do ssh-copy-id -i ~/.ssh/id_rsa.pub $host; done
+[ansible@hail ~]# ssh-keygen -t rsa -b 4096 -N ""
+[ansible@hail ~]# for host in rocky grace; do ssh-copy-id -i ~/.ssh/id_rsa.pub $host; done
 (Enter the ansible user's password for both nodes)
 ```
 
