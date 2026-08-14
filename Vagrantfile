@@ -1,7 +1,7 @@
 $hostsfile = <<-SCRIPT
-echo "192.168.99.10   ansible.mydomain.com   ansible" >> /etc/hosts
-echo "192.168.99.11   node1.mydomain.com     node1" >> /etc/hosts
-echo "192.168.99.12   node2.mydomain.com     node2" >> /etc/hosts
+echo "192.168.99.10   hail.hailmary.local    hail" >> /etc/hosts
+echo "192.168.99.11   rocky.hailmary.local   rocky" >> /etc/hosts
+echo "192.168.99.12   grace.hailmary.local   grace" >> /etc/hosts
 SCRIPT
 
 Vagrant.configure("2") do |config|
@@ -11,44 +11,43 @@ Vagrant.configure("2") do |config|
     vb.gui = false
   end
 
- # Create the first VM called ansible
-  config.vm.define :ansible do |ansible|
-    ansible.vm.box = "generic/rocky9"
+ # Create the first VM called hail
+  config.vm.define :hail do |hail|
+    hail.vm.box = "generic/rocky9"
     config.vm.box_version = "4.3.12"
-    ansible.vm.hostname = "ansible.mydomain.com"
-    ansible.vm.provider "virtualbox" do |vb|
+    hail.vm.hostname = "hail.hailmary.local"
+    hail.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = "2"
     end
-    ansible.vm.provision "hostsfile setup", type: "shell", inline: $hostsfile
-    ansible.vm.network :private_network, ip: "192.168.99.10"
+    hail.vm.provision "hostsfile setup", type: "shell", inline: $hostsfile
+    hail.vm.network :private_network, ip: "192.168.99.10"
     end
 
 
-  # Create the second VM called node1
-  config.vm.define :node1 do |node1|
-    node1.vm.box = "generic/rocky9"
+  # Create the second VM called rocky
+  config.vm.define :rocky do |rocky|
+    rocky.vm.box = "generic/rocky9"
     config.vm.box_version = "4.3.12"
-    node1.vm.hostname = "node1.mydomain.com"
-    node1.vm.provider "virtualbox" do |vb|
+    rocky.vm.hostname = "rocky.hailmary.local"
+    rocky.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = "2"
     end
-    node1.vm.network :private_network, ip: "192.168.99.11"
-    node1.vm.provision "hostsfile setup", type: "shell", inline: $hostsfile
+    rocky.vm.network :private_network, ip: "192.168.99.11"
+    rocky.vm.provision "hostsfile setup", type: "shell", inline: $hostsfile
   end
 
-  # Create the third VM called node2
-  config.vm.define :node2 do |node2|
-    node2.vm.box = "generic/rocky9"
+  # Create the third VM called grace
+  config.vm.define :grace do |grace|
+    grace.vm.box = "generic/rocky9"
     config.vm.box_version = "4.3.12"
-    node2.vm.hostname = "node2.mydomain.com"
-    node2.vm.provider "virtualbox" do |vb|
+    grace.vm.hostname = "grace.hailmary.local"
+    grace.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = "2"
     end
-    node2.vm.provision "hostsfile setup", type: "shell", inline: $hostsfile
-    node2.vm.network :private_network, ip: "192.168.99.12"
+    grace.vm.provision "hostsfile setup", type: "shell", inline: $hostsfile
+    grace.vm.network :private_network, ip: "192.168.99.12"
   end
 end
-

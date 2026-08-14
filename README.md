@@ -20,20 +20,20 @@
 vagrant up
 ```
     
-The vagrant script will set up 3 Rocky 9 VMs: ansible, node1, and node2. 
+The vagrant script will set up 3 Rocky 9 VMs: hail, rocky, and grace. 
 
 In three separate terminals, you want to execute the following commands to ssh into the boxes:
 
 ```
-vagrant ssh ansible
+vagrant ssh hail
 ```
 
 ```
-vagrant ssh node1
+vagrant ssh rocky
 ```
 
 ```
-vagrant ssh node2
+vagrant ssh grace
 ```
 
 From there, you can change the settings in /etc/ssh/sshd_config, change root password, and so forth.
@@ -76,13 +76,13 @@ Please refer to the official Vagrant documentation here: https://developer.hashi
 
 If you're on native Linux, you can skip VirtualBox/Vagrant entirely and provision the same 3-node lab directly on libvirt/QEMU/KVM.
 
-The lab uses the same `192.168.99.0/24` network and role layout as the Vagrant setup above, just with different hostnames/domain:
+The lab uses the same `192.168.99.0/24` network, hostnames, and role layout as the Vagrant setup above:
 
-| Role | Vagrant hostname | libvirt hostname | IP |
-|---|---|---|---|
-| NFS/Ansible control node | `ansible.mydomain.com` | `hail.hailmary.local` | 192.168.99.10 |
-| Node 1 | `node1.mydomain.com` | `rocky.hailmary.local` | 192.168.99.11 |
-| Node 2 | `node2.mydomain.com` | `grace.hailmary.local` | 192.168.99.12 |
+| Role | Hostname | IP |
+|---|---|---|
+| NFS/Ansible control node | `hail.hailmary.local` | 192.168.99.10 |
+| Node 1 | `rocky.hailmary.local` | 192.168.99.11 |
+| Node 2 | `grace.hailmary.local` | 192.168.99.12 |
 
 VMs are built from a golden Rocky 9 cloud image using cloud-init and `qemu-img` backing-file overlays (so rebuilds are instant and never touch the golden image).
 
