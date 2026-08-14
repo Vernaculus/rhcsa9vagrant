@@ -1,6 +1,8 @@
 # Red Hat Enterprise Linux RHCSA 9 Vagrant Lab for Exam EX200 using Rocky 9.6
 
-# Updated on 2025-07-11
+# Updated on 2026-08-14
+
+> **⚠️ Untested:** The Vagrantfile deployment (hail/rocky/grace VMs) has not been tested since the recent hostname rename and has not been verified end-to-end. Use with caution and open an issue if you hit problems.
 
 # How to use this lab
 - [Install virtualbox](https://download.virtualbox.org/virtualbox/7.1.6/VirtualBox-7.1.6-167084-Win.exe)
