@@ -21,10 +21,8 @@ DexTutor's tutorial can be found <a href="https://www.youtube.com/watch?v=N3HFDv
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 ### ANSWER #15.1:
-
 * First, if you are running virtual machines, you will need to add an additional storage device here...6GB,5GB, and 4GB "Hard Disks"
 * You can shut down the virtual machine and then add the additional storage as needed.
-
 ### Step 1: Verify Attached Storage
 ```bash
 [root@grace ~]# lsblk
@@ -39,71 +37,48 @@ vdb            252:16   0    6G  0 disk
 vdc            252:17   0    5G  0 disk
 vdd            252:18   0    4G  0 disk
 ```
-
-### Step 2: Prepare Disks with parted
-Execute these commands for each new disk (`/dev/vdb`, `/dev/vdc`, `/dev/vdd`):
-```bash
-[root@grace ~]# parted /dev/vdb mklabel gpt
-[root@grace ~]# parted -s /dev/vdb mkpart primary xfs 0% 100%
-[root@grace ~]# parted /dev/vdb set 1 lvm on
-```
->Repeat similarly for `/dev/vdc` and `/dev/vdd`.
-
-### Step 3: Verify Partitioning
-```bash
-lsblk
-```
-
-### Step 4: Create Physical Volumes
+### Step 2: Create Physical Volumes
+No partition table is needed here. These three disks are dedicated entirely to LVM, so `pvcreate` writes LVM metadata straight to each raw disk.
 ```bash
 [root@grace ~]# pvcreate /dev/vdb /dev/vdc /dev/vdd
-
 # We can verify that they are available:
 [root@grace ~]# pvs
-PU           VG      Fmt    Attr    PSize   PFree
-/dev/sdb             1um2   ---     6.00g   6.00g
-/dev/sdc             1vm2   ---     5.00g   5.00g
-/dev/sdd             1um2   ---     4.00g   4.00g
+PV           VG      Fmt    Attr    PSize   PFree
+/dev/vdb             lvm2   ---     6.00g   6.00g
+/dev/vdc             lvm2   ---     5.00g   5.00g
+/dev/vdd             lvm2   ---     4.00g   4.00g
 ```
-
-### Step 5: Create Volume Group
+### Step 3: Create Volume Group
 ```bash
-[root@grace ~]# vgcreate VG1 /dev/sdb /dev/sdc
+[root@grace ~]# vgcreate VG1 /dev/vdb /dev/vdc /dev/vdd
   Volume group "VG1" successfully created
-
 # Verify the new VG1 has been created:
 [root@grace ~]# vgs
-VG   #PU  #LV #SN Attr     VSize   VFree
-VG1  2    0   0   wz--n-   10.99g  10.99g
+VG   #PV  #LV #SN Attr     VSize   VFree
+VG1  3    0   0   wz--n-   14.99g  14.99g
 ```
-
-### Step 6: Create Logical Volume (LV1) using 8GB
+### Step 4: Create Logical Volume (LV1) using 8GB
 ```bash
-[root@grace ~]# lvcreate -L 8Gb -n LV1 VG1
+[root@grace ~]# lvcreate -L 8G -n LV1 VG1
   Logical volume "LV1" created.
-
 # Verify:
 [root@grace ~]# lvs
 LV     VG     Attr      LSize  Pool Origin Data Metax Move Log Cy Sync Convert
 LV1    VG1    wi-a--    8.00g
 ```
-
-### Step 7: Format and Mount Logical Volume
+### Step 5: Format and Mount Logical Volume
 ```bash
 [root@grace ~]# mkfs.xfs /dev/VG1/LV1
 [root@grace ~]# mkdir /lv
 ```
-
-### Step 8: Automate Mounting with `/etc/fstab`
+### Step 6: Automate Mounting with `/etc/fstab`
 ```bash
 [root@grace ~]# echo "/dev/VG1/LV1 /lv xfs defaults,nodev 0 0" >> /etc/fstab
 ```
-
-### Step 9: Instantly mount the LVM without a reboot
+### Step 7: Instantly mount the LVM without a reboot
 ```bash
 [root@grace ~]# mount -a
 ```
-
 * SUCCESS!!
 
 <br><br><br>
